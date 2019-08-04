@@ -6,7 +6,7 @@
 int diyakg=22,jingshui_chaoyakg = 24, 
 jingshui_gaoyakg = 26, shuiliu_chuanganqi = 2; //
     
-int chaolv1 = 23,chaolv2=25, jingshui = 27,  gaoyabeng =29;
+int chaolv1 = 23,chaolv2=25, jingshui = 27, culv=29 ,gaoyabeng =31;
 
 
 
@@ -22,8 +22,10 @@ byte chxi_cishu = 1;			//Ä¬ÈÏ
 byte leiji_biaozhun = 30;
 bool chaolv_chxi = false, loushui_bool = false; //?????????????
 unsigned long chaolv1chongxi_zongcishu = 0,chaolv2chongxi_zongcishu = 0;
-
-
+/*--------------------------------´ÖÂË-------------------------------------------*/
+bool culv_chxi = false;
+byte culv_chxi_cishu=2;
+unsigned long culv_chxi_time=0,culvchongxi_zongcishu = 0;
 /*--------------------------------µ÷ÊÔ-------------------------------------------*/
 bool tiaoshikg = true;
 /*--------------------------------ÏÔÊ¾ÆÁ´®¿Ú-------------------------------------------*/
@@ -87,7 +89,7 @@ bool baojing=false;
 unsigned long queshui_xianshi_jiange=0;
 /*-------------------------------tds¼ì²â--------------------------------------*/
 
-unsigned long tds_jiange=0;
+//unsigned long tds_jiange=0;
 unsigned int tds;
 unsigned char tds_buffer[20];
 unsigned int tds_buffer_index=0;

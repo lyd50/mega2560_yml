@@ -7,7 +7,7 @@ void add_message(String message);
 void closeall() ;/**/
 
 void tiaoshi(String pingmuxianshi);
-
+void culvchongxi();
 void chaolvchongxi();
 
 

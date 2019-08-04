@@ -29,7 +29,44 @@ void add_message(String message)
 		}
 	}
 }*/
+void  culvchongxi()
+{
+	for (int i = 0; i < culv_chxi_cishu; i++) //超滤1冲洗
+	{
+       xianshiping_sendorder2("zhuangtai", "正在冲洗粗滤1第" + (String)(i + 1) + "次");
 
+		culvchongxi_zongcishu = culvchongxi_zongcishu + 1;
+		//String s = itoa(chaolv1chongxi_zongcishu, str, 10);
+		EEPROM.updateLong(24, culvchongxi_zongcishu); //?????????
+		
+
+		xianshiping_sendorder2("shuju", "粗滤冲洗次数：" + (String)culvchongxi_zongcishu);
+		//delay(1500);
+		tiaoshi("chongxi culv");
+		//digitalWrite(zongjin, HIGH);//关闭总进水，用常开式电磁阀
+
+		digitalWrite(culv, HIGH); //????????
+
+		Serial.println(culvchongxi_zongcishu, DEC);
+
+		//detect(500); //?3??
+		//delay(2000);
+		//digitalWrite(zongjin, HIGH);
+
+		//xianshiping_sendorder2("shuju", "超滤冲洗脉冲数：" + (String)count);
+		//edp_upload_int(hz[1], count); //超滤冲洗脉冲数
+
+		delay(4000);
+		//digitalWrite(zongjin, LOW);
+
+		digitalWrite(culv, LOW);
+		delay(8000); //??????
+	}
+	
+	culv_chxi=false;
+
+
+}
 void chaolvchongxi()
 { 
 	//?????????? ???????????????
@@ -342,33 +379,34 @@ void chaolvchongxi()
 	{
 		if (tds_jiexi == false)
 		{
-			while (Serial1.available()) //发送前清空
+			while (Serial2.available()) //发送前清空
 			{
-				Serial1.read();
+				Serial2.read();
 			}
 			for (int i = 0; i < 3;)
 			{
-				Serial1.write(0xfd);
+				Serial2.write(0xfd);
 				i++;
 			}
 
-			tds_jiange = millis();
+			//tds_jiange = millis();
 			tds_buffer_index = 0;
+			tds_jiexi=true;//保证只发送一次
 		}
 
-		while (Serial1.available())
+		while (Serial2.available())
 		{ //int byte_count =Serial1.available();
 
-			tds_buffer[tds_buffer_index] = Serial1.read();
+			tds_buffer[tds_buffer_index] = Serial2.read();
 			if (tds_buffer[0] == 0xFD) //返回的确认信息
 			{
 				tds_jiexi = true;
 			}
 			else
 			{
-				while (Serial1.available()) //清空
+				while (Serial2.available()) //清空
 				{
-					Serial1.read();
+					Serial2.read();
 				}
 				return;
 			}
@@ -385,7 +423,7 @@ void chaolvchongxi()
 			
 			add_message("净水tds值：" + (String)tds);
 			tiaoshi("tds:" + (String)tds);
-			tds_jiexi = false;
+			tds_jiexi = false;//为下次发送命令准备
 		}
 	}
 

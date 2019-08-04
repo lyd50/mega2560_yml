@@ -1,18 +1,13 @@
 
 #include <Arduino.h>
 
-
-
-
-
 /*extern作用
 作用1，当与“C”一起使用时，如 extern "C" void fun(int a, int b)，则编译器中fun这个函数名按照c语言规则命名，而不是用c++规定命名。故C++中可以利用该法则调用c函数
 作用2，当他不与“C"在一起修饰变量或者函数时，如在头文件中，extern int g_Num；其作用就是声明函数或者变量的作用范围的关键字，其声明的函数和变量可以在本编译单元或者其他编译单元使用
  
 /*--------------------------------输入与输出------------------------------------------*/
-extern  int diyakg,  jingshui_gaoyakg, jingshui_chaoyakg, shuiliu_chuanganqi;//输入 
-extern int chaolv1,chaolv2, jingshui,  gaoyabeng ;// 
-
+extern  int diyakg, jingshui_gaoyakg,  jingshui_chaoyakg, shuiliu_chuanganqi;//输入 
+extern int chaolv1,chaolv2, jingshui,culv,  gaoyabeng ;// 
 
 /*--------------------------------水流传感器-------------------------------------------*/
  extern volatile int count; //????????????????
@@ -27,6 +22,11 @@ extern  byte leiji_biaozhun ;
 extern  bool chaolv_chxi , loushui_bool ; //?????????????
 extern  unsigned long chaolv1chongxi_zongcishu,chaolv2chongxi_zongcishu;
 //extern Chrono ch_chaolv1_dcf;//检查超滤电磁阀漏水
+
+/*--------------------------------粗滤-------------------------------------------*/
+extern bool culv_chxi;
+extern byte culv_chxi_cishu;
+extern unsigned long culv_chxi_time,culvchongxi_zongcishu;
 /*--------------------------------调试-------------------------------------------*/
 extern bool tiaoshikg ;
 /*--------------------------------显示屏串口-------------------------------------------*/
@@ -90,7 +90,7 @@ extern unsigned long baojing_begintime;//报警时间内机器停机
 extern unsigned long queshui_xianshi_jiange;
 /*-------------------------------tdsj检测--------------------------------------*/
 
-extern  unsigned long tds_jiange;
+//extern  unsigned long tds_jiange;
 extern unsigned int tds;
 extern unsigned char tds_buffer[20];
 extern unsigned int tds_buffer_index;
